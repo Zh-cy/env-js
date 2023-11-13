@@ -1,0 +1,15 @@
+{
+  "name": "docker-node-app",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "app.js",
+  "devDependencies": {
+    "nodemon": "^2.0.0"
+  }, 
+  "scripts": {
+    "start": "nodemon app.mjs"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
