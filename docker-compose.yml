@@ -1,14 +1,19 @@
 version: '3'
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.app
     ports:
       - "3000:3000"
     volumes:
-      - ./app:/usr/src/app
+      - ./src:/usr/src
       - /usr/src/app/node_modules
+      - /usr/src/notion-sdk-js/examples/web-from-any-block-type/node_modules
     depends_on:
       - mongo
+      - mysql
+    command: tail -f /dev/null
   mongo:
     image: mongo
     volumes:
@@ -23,6 +28,17 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - app
+  mysql:
+    build: 
+      context: ./mysql
+      dockerfile: Dockerfile.mysql
+    env_file:
+      - ./mysql/mysql.env
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
 
 volumes:
   mongo-data:
+  mysql-data:
