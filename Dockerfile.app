@@ -9,7 +9,11 @@ RUN npm install -g nodemon
 WORKDIR /usr/src/app
 
 RUN npm install mysql \
-    express
+    mysql2 \
+    express \
+    body-parser \
+    cors \
+    sequelize
 
 COPY /src/app/ ./
 
